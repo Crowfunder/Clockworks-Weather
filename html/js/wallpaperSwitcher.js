@@ -47,15 +47,35 @@ function wallpaperWrapper() {
     }
 
 
+// Define global variables
+// changeFrequency needs to be defined or API locks us out 
+var changeFrequency = 5000;
+var cityIDOWM;
+var urlOWM;
+var tokenOWM;
+
+
 // Get the properties from Wallpaper Engine
 window.wallpaperPropertyListener = {
-    applyUserProperties: function(properties) {
+    applyUserProperties: (properties) => {
 
-        const changeFrequency = properties.changefrequency.value;
-        const cityIDOWM = properties.cityidopenweathermap.value;
-        const urlOWM = properties.urlopenweathermap.value;
-        const tokenOWM = properties.tokenopenweathermap.value;
+        if (properties.changefrequency) {
+            changeFrequency = properties.changefrequency.value;
+        } 
+
+        if (properties.cityidopenweathermap) {
+            cityIDOWM = properties.cityidopenweathermap.value;
+        }
+
+        if (properties.urlopenweathermap) {
+            urlOWM = properties.urlopenweathermap.value;
+        }
+
+        if (properties.tokenopenweathermap) {
+            tokenOWM = properties.tokenopenweathermap.value;
+        }
     }
 };
+
 
 wallpaperWrapper();
