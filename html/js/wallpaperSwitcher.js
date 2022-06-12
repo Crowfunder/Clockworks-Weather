@@ -7,7 +7,7 @@ function changeVideoSource(url, id) {
 
 // Function returning weather state
 async function getWeather() {
-    let weather = await fetch(`${urlOWM}?id=${cityIDOWM}&appid=${tokenOWM}${paramsOWM}`)
+    let weather = await fetch(`${urlOWM}?id=${cityIDOWM}&appid=${tokenOWM}`)
     .then( (response) => response.json() )
     .then( (responseJSON) => { 
         return responseJSON.weather[0].main ;
@@ -26,7 +26,7 @@ async function weatherSwitcher(weatherState) {
             weatherState = weatherState_new;
 
             // Change the wallpaper
-            let wallpaperPath = settings.weather[weatherState];
+            let wallpaperPath = weathers[weatherState];
             changeVideoSource(wallpaperPath, "WallpaperVideo");
         }
     }
@@ -43,13 +43,20 @@ function wallpaperWrapper() {
     setInterval(
         async function() { 
             weatherState = await weatherSwitcher(weatherState);
-        }, settings.changeFrequency);
+        }, changeFrequency);
     }
 
-// Simplify the variable names
-const urlOWM = settings.urlOpenWeatherMap;
-const cityIDOWM = settings.cityIDOpenWeatherMap;
-const tokenOWM = settings.tokenOpenWeatherMap;
-const paramsOWM = settings.paramsOpenWeatherMap;
+
+// Get the properties from Wallpaper Engine
+window.wallpaperPropertyListener = {
+    applyUserProperties: function(properties) {
+
+        const changeFrequency = properties.changefrequency.value
+        const cityIDOWM = properties.cityidopenweathermap.value
+        const urlOWM = properties.urlopenweathermap.value
+        const tokenOWM = properties.tokenopenweathermap.value
+
+    }
+}
 
 wallpaperWrapper();
