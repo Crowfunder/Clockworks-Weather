@@ -51,12 +51,11 @@ function wallpaperWrapper() {
 window.wallpaperPropertyListener = {
     applyUserProperties: function(properties) {
 
-        const changeFrequency = properties.changefrequency.value
-        const cityIDOWM = properties.cityidopenweathermap.value
-        const urlOWM = properties.urlopenweathermap.value
-        const tokenOWM = properties.tokenopenweathermap.value
-
+        const changeFrequency = properties.changefrequency.value;
+        const cityIDOWM = properties.cityidopenweathermap.value;
+        const urlOWM = properties.urlopenweathermap.value;
+        const tokenOWM = properties.tokenopenweathermap.value;
     }
-}
+};
 
 wallpaperWrapper();
